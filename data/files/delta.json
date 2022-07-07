@@ -1,0 +1,20 @@
+[{
+  "inserts": [
+    {
+      "subject": {"value": "http://mu.semte.ch/services/file-service/files/7f8d220b-8e4c-44be-a352-6a815f36c990", "type": "uri"},
+      "predicate": {"value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "type": "uri"},
+      "object": {"value": "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject", "type": "uri"}
+    },
+    {
+      "subject": {"value": "http://mu.semte.ch/services/file-service/files/7f8d220b-8e4c-44be-a352-6a815f36c990", "type": "uri"},
+      "predicate": {"value": "http://mu.semte.ch/vocabularies/core/uuid", "type": "uri"},
+      "object": {"value": "7f8d220b-8e4c-44be-a352-6a815f36c990", "type": "string"}
+    },
+    {
+      "subject": {"value": "share://aaa.zip", "type": "uri"},
+      "predicate": {"value": "http://www.semanticdesktop.org/ontologies/2007/01/19/nie#dataSource", "type": "uri"},
+      "object": {"value": "http://mu.semte.ch/services/file-service/files/7f8d220b-8e4c-44be-a352-6a815f36c990", "type": "uri"}
+    }
+  ],
+  "deletes": []
+}]

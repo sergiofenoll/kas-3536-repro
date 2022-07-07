@@ -3,6 +3,8 @@
 !/data/db/virtuoso.ini
 !/data/db/toLoad
 !/data/db/toLoad/*
+/data/files/aaa.zip
+/data/files/consumed/aaa.zip
 
 docker-compose.override.yml
 

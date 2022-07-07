@@ -9,10 +9,17 @@ services:
       - dispatcher:dispatcher
     ports:
       - "80:80"
+  my-identifier:
+    image: my-mu-identifier
+    environment:
+      SESSION_COOKIE_SECURE: "on"
+      IDLE_TIMEOUT: 300000
+    links:
+      - dispatcher:dispatcher
+    ports:
+      - "1080:80"
   dispatcher:
     image: semtech/mu-dispatcher:2.0.0
-    links:
-      - resource:resource
     volumes:
       - ./config/dispatcher:/config
   database:
@@ -20,14 +27,35 @@ services:
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/application"
+      CORS_ENABLED: "true"
     ports:
       - "8890:8890"
     volumes:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
-  resource:
-    image: semtech/mu-cl-resources:1.20.0
+  yasgui:
+    image: sergiofenoll/yasgui:4.2.20
+    ports:
+      - "8891:80"
+  file:
+    image: kanselarij/public-file-service:4.1.0
+    ports:
+      - "8080:80"
+    environment:
+      LOG_LEVEL: "debug"
+    volumes:
+      - ./data/files:/share
+  consumer:
+    image: kanselarij/themis-publication-consumer:2.2.0
     links:
       - database:database
+    environment:
+      SYNC_BASE_URL: "http://foobar" # CHANGE ME: this should point to the identifier's IP, not localhost
+      DOWNLOAD_DOCUMENT_PATH: "/files/:id/download"
+      INGEST_INTERVAL: 3600000
+      LOG_SPARQL_ALL: "false"
+      DEBUG_AUTH_HEADERS: "false"
     volumes:
-      - ./config/resources:/config
+      - ./data/files/consumed:/share
+  producer:
+    image: kanselarij/themis-publication-producer:1.1.0
