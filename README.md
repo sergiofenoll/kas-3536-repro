@@ -69,6 +69,8 @@ If the file you provided is large enough and takes long enough to download, fetc
 
 ## With themis-publication-consumer
 
+Replace `SYNC_BASE_URL` to point to the `identifier`'s container in the docker-compose file.
+
 In `./data/files/delta.json`, change the string `share://aaa.zip` to match the name of the file you provided. Start the `consumer` service, it should immediately try to sync. It's set up to use the default identifier, in which case it should get to the point of trying to download the file, but hang after a while. `./data/files/consumed` will contain a partial copy of the file that you provided.
 
 Replace `SYNC_BASE_URL` to point to `my-identifier` instead, reset the DB's graph (I do this via the conductor, but choose whatever you find suitable) and restart the consumer. This time you should see it succeed the download and continue logging the expected output. `./data/files/consumed` should contain an exact copy of the file that you provided.
