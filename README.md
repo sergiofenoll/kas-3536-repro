@@ -1,6 +1,6 @@
 # KAS-3536 Reproduction
 
-Put a large file in `./data/files`. In this example I called it `aaa.zip`, but call it whatever you want.
+Put a large file in `./data/files`. In this example I called it `aaa.zip`, but call it whatever you want. Note that if you pick a different name, you need to adapt the query below and the `./data/files/delta.json` file.
 
 Run the following query against the database:
 
